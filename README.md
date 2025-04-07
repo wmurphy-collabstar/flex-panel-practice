@@ -16,7 +16,7 @@ When the panels are opened (via mouse or keyboard), I decided to keep the same t
 
 ## Running the project
 ### Live version
-[Flex Panel Gallery](#)
+[Flex Panel Gallery](https://wmurphy-collabstar.github.io/flex-panel-practice)
 
 ### From the repo
 1. Clone this repo locally
