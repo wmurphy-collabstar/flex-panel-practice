@@ -9,9 +9,14 @@
 </head>
 <body>
   <nav>
+    <!-- Link to the main gallery page -->
     <a href="./index.html">Home</a>
+    <!-- Link to page displaying credits for each photo -->
     <a href="./photo-credits.html">Photo Credits</a>
+    <!-- Button that will randomly shuffle the order of panels -->
+    <button id="shuffle-panels">Shuffle Panels</button>
   </nav>
+  <!-- Top Panel Group -->
   <div class="panels">
     <div tabindex="0" class="panel panel1">
       <p>Fry</p>
@@ -20,12 +25,12 @@
     </div>
     <div tabindex="0" class="panel panel2">
       <p>Spice</p>
-      <p>Of</p> <!-- Your -->
+      <p>Of</p>
       <p>Life</p>
     </div>
     <div tabindex="0" class="panel panel3">
       <p>Love</p>
-      <p>A</p> <!-- Many -->
+      <p>A</p>
       <p>Latte</p>
     </div>
     <div tabindex="0" class="panel panel4">
@@ -35,10 +40,11 @@
     </div>
     <div tabindex="0" class="panel panel5">
       <p>Ramen</p>
-      <p>Egg</p> <!---->
+      <p>Egg</p>
       <p>Heaven</p>
     </div>
   </div>
+  <!-- Bottom Panel Group -->
   <div class="panels">
     <div tabindex="0" class="panel panel6">
       <p>Sundaes</p>
@@ -47,12 +53,12 @@
     </div>
     <div tabindex="0" class="panel panel7">
       <p>Ice</p>
-      <p>Scream</p> <!-- Your -->
+      <p>Scream</p>
       <p>Cream</p>
     </div>
     <div tabindex="0" class="panel panel8">
       <p>Oh</p>
-      <p>Strawberry</p> <!-- Many -->
+      <p>Sweet</p>
       <p>Crepe</p>
     </div>
     <div tabindex="0" class="panel panel9">
@@ -62,17 +68,20 @@
     </div>
     <div tabindex="0" class="panel panel10">
       <p>Chocolate</p>
-      <p>Cake</p> <!---->
+      <p>Cake</p>
       <p>Heaven</p>
     </div>
   </div>
 
   <script>
+    //Get all panels, shuffle button, and both panel groups
     const panels = document.querySelectorAll('.panel');
+    const shufflePanelsBtn = document.querySelector('#shuffle-panels');
+    const [topPanelGroup, bottomPanelGroup] = document.querySelectorAll(".panels");
 
+    // Callback function that opens a tab when user clicks with mouse or presses "Enter" with keyboard
     function toggleOpen(e){
       if (event.type === "keydown" && event.keyCode !== 13){
-        // console.log(e.keyCode);
         return;
       }
       else{
@@ -80,6 +89,7 @@
       }
     }
 
+    //Callback function that brings top and bottom words into the panel from off screen
     function toggleActive(e){
       // console.log(e.propertyName);
       if (e.propertyName.includes('flex')){
@@ -87,13 +97,36 @@
       }
     }
 
+    //Copied random shuffle function from solution to problem on Javascript.info: https://javascript.info/task/shuffle#:~:text=Write%20the%20function%20shuffle(array,%2C%202%5D%20%2F%2F%20...
+    //Helper function that randomly shuffles order of array using the Fisher-Yates shuffle algorithm
+    function shuffle(listOfItems){
+      for (let i = listOfItems.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [listOfItems[i], listOfItems[j]] = [listOfItems[j], listOfItems[i]];
+      }
+    }
+
+    //Callback function that randomly shuffles the order of panels on the page
+    function shufflePanels(){
+      const panelsArray = Array.from(panels);
+      shuffle(panelsArray);
+      const topPanelGroupArray = panelsArray.slice(0, 5);
+      const bottomPanelGroupArray = panelsArray.slice(5, );
+      topPanelGroup.innerText = "";
+      bottomPanelGroup.innerText = "";
+      topPanelGroupArray.forEach(panel => topPanelGroup.appendChild(panel));
+      bottomPanelGroupArray.forEach(panel => bottomPanelGroup.appendChild(panel));
+    }
+
+    //Event listener that calls the toggleOpen function when the panel is clicked with mouse
     panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+    //Event listener that calls the toggleOpen function when the user focuses on element and presses "Enter" on keyboard
     panels.forEach(panel => panel.addEventListener('keydown', toggleOpen));
+    //Event listener that calls toggleActive when panel finishes opening or closing
     panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
+    //Event listener that calls shufflePanels whenever the shufflePanelsBtn is clicked
+    shufflePanelsBtn.addEventListener("click", shufflePanels);
 
   </script>
-
-
-
 </body>
 </html>

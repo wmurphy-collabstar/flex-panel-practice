@@ -1,26 +1,28 @@
+/*CSS for Gallery page*/
+
 html {
     box-sizing: border-box;
     background: #ffc600;
     font-family: 'helvetica neue';
     font-size: 20px;
     font-weight: 200;
-  }
+}
 
-  body {
+body {
     margin: 0;
-  }
+}
 
-  *, *:before, *:after {
+*, *:before, *:after {
     box-sizing: inherit;
-  }
+}
 
-  .panels {
+.panels {
     height: 50vh;
     overflow: hidden;
     display: flex;
-  }
+}
 
-  .panel {
+.panel {
     background: #6B0F9C;
     box-shadow: inset 0 0 0 5px rgba(255,255,255,0.1);
     color: white;
@@ -29,35 +31,40 @@ html {
     /* Safari transitionend event.propertyName === flex */
     /* Chrome + FF transitionend event.propertyName === flex-grow */
     transition:
-      font-size 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
-      flex 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
-      background 0.2s,
-      filter 0.3s;
-    font-size: 15px;/*20px;*/
+        font-size 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+        flex 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+        background 0.2s,
+        /*Added transition for saturation and blur filter on static panels*/
+        filter 0.3s;
+    /*Adjusted size from 20px to 15px to accomodate second row of panels*/
+    font-size: 15px;
     background-size: cover;
     background-position: center;
     flex: 1;
     justify-content: center;
     display: flex;
     flex-direction: column;
+    /*Reduces interest in panel when not hovered over or focused on*/
     filter: saturate(30%) blur(1px);
-  }
+}
 
-  .panel1 { background-image:url(./assets/logan-weaver-fries-unsplash.jpg); }
-  .panel2 { background-image:url(./assets/lucija-ros-spices-unsplash.jpg); }
-  .panel3 { background-image:url(./assets/nathan-dumlao-latte-unsplash.jpg); }
-  .panel4 { background-image:url(./assets/zach-camp-bread-unsplash.jpg); }
-  .panel5 { background-image:url(./assets/mathias-reding-ramenegg-unsplash.jpg); }
-  .panel6 { background-image:url(./assets/emile-mbunzama-sundae-unsplash.jpg); }
-  .panel7 { background-image:url(./assets/ian-dooley-icecream-unsplash.jpg); }
-  .panel8 { background-image:url(./assets/joyful-crepes-unsplash.jpg); }
-  .panel9 { background-image:url(./assets/kobby-mendez-donuts-unsplash.jpg); }
-  .panel10 { background-image:url(./assets/pushpak-dsilva-chocolatecake-unsplash.jpg); }
+/*Images I chose for panels, as well as 5 more for the second row*/
+.panel1 { background-image:url(./assets/logan-weaver-fries-unsplash.jpg); }
+.panel2 { background-image:url(./assets/lucija-ros-spices-unsplash.jpg); }
+.panel3 { background-image:url(./assets/nathan-dumlao-latte-unsplash.jpg); }
+.panel4 { background-image:url(./assets/zach-camp-bread-unsplash.jpg); }
+.panel5 { background-image:url(./assets/mathias-reding-ramenegg-unsplash.jpg); }
+.panel6 { background-image:url(./assets/emile-mbunzama-sundae-unsplash.jpg); }
+.panel7 { background-image:url(./assets/ian-dooley-icecream-unsplash.jpg); }
+.panel8 { background-image:url(./assets/joyful-crepes-unsplash.jpg); }
+.panel9 { background-image:url(./assets/kobby-mendez-donuts-unsplash.jpg); }
+.panel10 { background-image:url(./assets/pushpak-dsilva-chocolatecake-unsplash.jpg); }
 
-  /* Flex Children */
-  .panel > * {
+/* Flex Children */
+.panel > * {
     margin: 0;
     width: 100%;
+    /*Edited transition to have stop motion effect*/
     transition: transform 0.3s steps(10, jump-both),
     background 0.3s;
     /* border: 1px solid red; */
@@ -65,84 +72,89 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
+    /*Added light black background behind text to increase contrast*/
     background: rgba(10, 20, 30, 1);
     z-index: 2;
-  }
+}
 
-  .panel:hover, .panel:focus{
+/*Hover and focus effect for whole panel, sharpening and saturating the panel and adding a white border*/
+.panel:hover, .panel:focus{
     box-shadow: inset 0 0 0 5px rgba(255,255,255,0.7);
     filter: saturate(100%);
-  }
+}
 
-  .panel:hover > *, .panel:focus > *{
+/*Hover and focus effect on panel children, improving transparency behind text so background image is visible*/
+.panel:hover > *, .panel:focus > *{
     background: rgba(10, 20, 30, .62);
-  }
+}
 
-  .panel > *:first-child {
+.panel > *:first-child {
     transform: translateY(-100%);
-  }
+}
 
-  .panel.open-active > *:first-child {
+.panel.open-active > *:first-child {
     transform: translateY(0%);
-    /* transition: transform 0.5s cubic-bezier(1,.06,.16,1.38); */
-  }
+}
 
-  .panel > *:last-child {
+.panel > *:last-child {
     transform: translateY(100%);
-  }
+}
 
-  .panel.open-active > *:last-child {
+.panel.open-active > *:last-child {
     transform: translateY(0%);
-    /* transition: transform 0.5s cubic-bezier(1,.06,.16,1.38); */
-  }
+}
 
-  .panel p {
+.panel p {
     text-transform: uppercase;
     font-family: 'Amatic SC', cursive;
     text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
     font-size: 2em;
-  }
+}
 
-  .panel p:nth-child(2) {
+.panel p:nth-child(2) {
     font-size: 4em;
-  }
+}
 
-  .panel.open {
+.panel.open {
+    /*Reduced size of increased text from 40px to 30px to accomodate grid layout*/
     font-size: 30px;/*40px;*/
     flex: 5;
+    /*Remove reduced saturation and increased blur when panel is open*/
     filter: saturate(100%);
     filter: blur(0);
-  }
+}
 
-  nav, h1{
+/*Styling for nav bar on whole site*/
+nav, h1{
     padding: 1rem 2rem;
     margin: 0;
-  }
+}
 
-  nav{
+nav{
     font-weight: 700;
-  }
+}
 
-  .flex-container{
+/*Styling for photo credits page figures, which include each image used and credits for that image*/
+.flex-container{
     display: flex;
     flex-wrap: wrap;
     padding: 1rem 2rem;
     justify-content: space-between;
-  }
+}
 
-  .photo-credit{
+.photo-credit{
     margin: 0;
     padding: 0;
     padding-bottom: 1rem;
     min-width: 250px;
-  }
+}
 
-  .photo-credit-img{
+.photo-credit-img{
     width: 200px;
     height: 200px;
     object-fit: cover;
-  }
+}
 
-  .photo-credit-caption{
+.photo-credit-caption{
     width: 200px;
-  }
+}
